@@ -14,37 +14,33 @@ val inventory_2:
         105->("Tikiri Mari",10,90.00)
 )
 
-//To print
 def printInventory(inventory:Map[Int,(String,Int,Double)]): Unit={
-  //  val nameList = inventory.values.map(_._1).toList
-     /*   
-    println(s"$nameList")
-    */
-
     println("\n")
     println("-----Products of this inventory------")
+    var i = 1
     inventory.values.map(_._1).foreach{     // get the first value from key-value the inventary map and 
-        a => println(s"$a")
+        a => println(s"$i.$a")
+        i = i+1
     }
 }
 
 def totalValue(inventory:Map[Int,(String,Int,Double)]): Unit={
-    var inventoryValue: Double = 0;
-    val wholeValue = inventory.values.map{
+    val wholeValue = inventory.values.map{            // List
         case (_, quantity, price) => quantity*price
     }              
 
+    var inventoryValue: Double = 0;
     wholeValue.foreach{
         a => inventoryValue = inventoryValue + a
     }
+
     println("\n");
     println(s"Total value of this inventory in each product is : $wholeValue");
     println(s"Total value of inventory is : Rs.$inventoryValue")
 }
 
 def checkEmpty(inventory:Map[Int,(String,Int,Double)]): Unit={
-    val checkFlag = inventory.isEmpty
-    if(checkFlag == true){
+    if(inventory.isEmpty){
         println("\nInventory is Empty.")
     }else{
         println("\nInventory is not Empty.")
@@ -68,17 +64,16 @@ def mergeInventory(inventory1:Map[Int,(String,Int,Double)],inventory2:Map[Int,(S
         newInventory.foreach{
             case(id,(name,quantity,price)) => 
                 println(s"$id => name:$name , quantity:$quantity , price: Rs.$price")
-                //println(s"$id, $name , $quantity, $price")
             }
     }
 
 def productFind(id:Int): Unit={
     inventory_1.get(id) match{
         case Some((name,quantity,price)) =>
-            println(s"\nFound product with id : $id!")
-            println(s"$id => name:$name , quantity:$quantity , price: Rs.$price")
+            println(s"\nFound product with id : $id !")
+            println(s"$id => name:$name , quantity:$quantity , price: Rs.$price\n")
         case None => 
-            println(s"\nThere is no product with this product id : $id in this inventory.")
+            println(s"\nThere is no product with this product id : $id in this inventory.\n")
         }
 }
 
